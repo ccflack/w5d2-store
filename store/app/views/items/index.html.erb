@@ -1,0 +1,50 @@
+<div>
+  <%= link_to "Create new item", new_item_path %>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>
+        Quantity
+      </th>
+      <th>
+        Revenue
+      </th>
+      <% @colums.each do |column| %>
+        <th>
+          <%= column.upcase %>
+        </th>
+      <% end %>
+      <th>
+        Modify?
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td>
+          <%= item.total_ordered if item.total_ordered %>
+        </td>
+        <td>
+          <%= item.total_revenue %>
+        </td>
+        <% item.attributes.each do |k, v| %>
+          <% if k == 'price' %>
+          <td>
+            <%= number_to_currency(v/100.0) %>
+          </td>
+          <% else %>
+          <td>
+            <%= v %>
+          </td>
+          <% end %>
+        <% end %>
+        <td>
+          <%= button_to "Edit", edit_item_path(:id => item.id), method: :get %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
