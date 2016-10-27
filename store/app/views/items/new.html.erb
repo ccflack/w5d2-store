@@ -1,0 +1,41 @@
+<% if @item.errors.any? %>
+  <ul>
+    <% @item.errors.full_messages.each do |err| %>
+      <li>
+        <%= err %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<div class="container">
+
+<%= form_for @item do |f| %>
+  <div class="row">
+    <%= f.label :title %>
+  </div>
+  <div>
+    <%= f.text_field :title %>
+  </div>
+  <div class="row">
+    <%= f.label :category %>
+  </div>
+  <div>
+    <%= f.text_field :category %>
+  </div>
+  <div class="row">
+    <%= f.label :description %>
+  </div>
+  <div>
+    <%= f.text_area :description, rows: 10 %>
+  </div>
+  <div class="row">
+    <%= f.label :price, as: :currency%>
+  </div>
+  <div>
+    <%= f.text_field :price %>
+  </div>
+  <%= f.submit %>
+<% end %>
+
+</div>
